@@ -2,19 +2,34 @@
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <style>
-  
-  .page-content{
+  .page-content {
     margin: 100px auto;
     max-width: 450px;
   }
 
+  .grey {
+    color: rgba(0, 0, 0, 0.4)
+  }
+
+  .message {
+    margin-bottom: 0.5em;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+  }
 </style>
 <!-- Always shows a header, even in smaller screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title">Chat App</span>
+      <span class="mdl-layout-title">
+        {% if request.user.is_authenticated %}
+          Welcome {{ request.user.first_name }}!
+          {% else %}
+          ChatApp 
+        {% endif %}
+      </span>
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation. We hide it in small screens. -->
@@ -25,7 +40,9 @@
     </div>
   </header>
   <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">Chat App</span>
+    <span class="mdl-layout-title">
+ ChatApp
+    </span>
     <nav class="mdl-navigation">
       <a class="mdl-navigation__link" href="">Link</a>
       <a class="mdl-navigation__link" href="">Link</a>
@@ -33,6 +50,18 @@
   </div>
   <main class="mdl-layout__content">
     <div class="page-content">
+
+      {% if request.user.is_authenticated %}
+      <h1>Chatroom</h1>
+
+      {% for message in messages %}
+      <div class="message">
+        <span class="grey">[{{ message.created_at }}]</span>
+        {{ message.author }}:
+        <i>{{ message.text }}</i>
+      </div>
+      {% endfor %}
+
       <form action="/chat/" method="POST">
         {% csrf_token %}
         <div class="mdl-textfield mdl-js-textfield">
@@ -43,6 +72,14 @@
           Button
         </button>
       </form>
+
+      {% else %}
+
+      <h1>Forgot to login?</h1>
+      <p>Please <a href="/login/">login here </a>to get access to the chatroom</p>
+
+      {% endif %}
+
 
     </div>
   </main>

@@ -4,7 +4,7 @@ from .models import Message, Chat
 
 # Register your models here.
 class MessageAdmin(admin.ModelAdmin):
-    fields = ('text', 'created_at', 'author', 'receiver')
+    fields = ('chat','text', 'created_at', 'author', 'receiver')
     list_display = ('text', 'created_at', 'receiver', 'author')
     pass
 
