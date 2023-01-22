@@ -1,89 +1,32 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-<style>
-    .page-content {
-        margin: 100px auto;
-        max-width: 450px;
-    }
+{% extends 'mastertemplate.html' %}
+{% block content %}
 
-    .input {
-        margin-bottom: 8px;
-        height: 52px;
-    }
 
-    .input input {
-        height: 60%;
-    }
+<h1>Login</h1>
 
-    .input button {
-        height: 60%;
-    }
+{% if wrong_password %}
+<p>Login Data was incorrect. Please try again. </p>
+{% endif %}
 
-    .flex_col{
-        display: flex;
-        flex-direction: column;
-        width: max-content;
-    }
-</style>
-<!-- Always shows a header, even in smaller screens. -->
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-            <!-- Title -->
-            <span class="mdl-layout-title">
-                {% if request.user.is_authenticated %}
-                You are already logged in.
-                {% else %}
-                Login or Register
-                {% endif %}
-            </span>
-            <!-- Add spacer, to align navigation to the right -->
-            <div class="mdl-layout-spacer"></div>
-            <!-- Navigation. We hide it in small screens. -->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-            </nav>
-        </div>
-    </header>
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">
-            Login
-        </span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-        </nav>
+<form action="/login/" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="redirect" value="{{ redirect }}">
+    <div class="flex_col">
+        <label for="name">Name</label>
+        <input name="username" type="text">
     </div>
-    <main class="mdl-layout__content">
-        <div class="page-content">
-            <h1>Login</h1>
-            {% if wrong_password %}
-            <p>Login Data was incorrect. Please try again. </p>
-            {% endif %}
-            <form action="/login/" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="redirect" value="{{ redirect }}">
-                <div class="flex_col">
-                    <label for="name">Name</label>
-                    <input name="username" type="text">
-                </div>
-                <div class="flex_col">
-                    <label for="password">Passwort</label>
-                    <input name="password" type="password">
-                </div>
-                <!-- <div class="flex_col">
+    <div class="flex_col">
+        <label for="password">Passwort</label>
+        <input name="password" type="password">
+    </div>
+    <!-- <div class="flex_col">
                     <label for="password_confirm">Passwort wiederholen</label>
                     <input name="password_confirm" type="password">
                 </div> -->
-                <button>Einloggen</button>
-            </form>
-            <div>Don`t have an account yet? Register <a
-                href="/register">here</a>
-           </div>
+    <button>Einloggen</button>
+</form>
 
-        </div>
-   
-    </main>
+<div>Don`t have an account yet? Register <a href="/register">here</a>
 </div>
+
+{% endblock %}

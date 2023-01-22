@@ -1,4 +1,3 @@
-from http.client import HTTPResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -28,7 +27,6 @@ def login_view(request):
             # get value of hidden input field "redirect"
             return HttpResponseRedirect(request.POST.get('redirect'))
         else:
-            print(redirect)
             return render(request, 'auth/login.html', {'wrong_password': True}, {'redirect': redirect})
     return render(request, 'auth/login.html', {'redirect': redirect})
     
