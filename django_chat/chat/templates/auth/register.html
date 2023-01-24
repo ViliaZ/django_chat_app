@@ -1,0 +1,33 @@
+{% extends 'mastertemplate.html' %}
+{% block content %}
+
+
+<h1>Login</h1>
+
+{% if error_message %}
+<p class="error-msg">{{ error_message }}</p>
+{% endif %}
+
+<form action="/register/" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="redirect" value="{{ redirect }}">
+    <div class="flex_col">
+        <label for="name">Name</label>
+        <input name="username" type="text">
+    </div>
+    <div class="flex_col">
+        <label for="password">Passwort</label>
+        <input name="passwordvalue1" type="password">
+    </div>
+    <div class="flex_col">
+        <label for="password_confirm">Passwort wiederholen</label>
+        <input name="passwordvalue2" type="password">
+    </div>
+    <button>Register</button>
+</form>
+
+<div>Or <a href="/login">login here</a> if you already have an account.
+</div>
+
+
+{% endblock %}

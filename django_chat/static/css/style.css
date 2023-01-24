@@ -1,0 +1,43 @@
+.page-content {
+    margin: 100px auto;
+    max-width: 450px;
+}
+
+.grey {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.message {
+    margin-bottom: 0.5em;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+}
+
+.input {
+    margin-bottom: 8px;
+    height: 52px;
+}
+
+.input input {
+    height: 60%;
+}
+
+.input button {
+    height: 60%;
+}
+
+.flex_col {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+}
+
+.error-msg{
+    color: red;
+    font-style: italic;
+}
+
+form{
+    margin-bottom: 12px;
+}
