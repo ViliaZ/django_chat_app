@@ -1,21 +1,71 @@
 {% extends 'mastertemplate.html' %}
 {% block content %}
 
+<script>
+
+async function sendMessage() {
+    let message = messagefield.value;
+    let messageTime = getFormattedDate();
+    let token = '{{ csrf_token }}';
+
+    let formdata = new FormData();
+    formdata.append('textmessage', message);
+    formdata.append('csrfmiddlewaretoken', token);
+
+    messageContainer.innerHTML += `
+        <div class="message">
+          <span class="grey">[ ${ messageTime } ]</span>
+          {{ request.user.first_name}}:
+          <i>${ message }</i>
+        </div>
+    `
+    try {
+        await fetch('/chat/',{
+            method: 'POST',
+            body: formdata
+        })
+    } catch (e) {
+        console.error('Could not post the message to backend, an error occurred:', e)
+    }
+}
+
+function getFormattedDate() {
+  let now = new Date();
+  let targetFormat = 'mm. dd, yy'
+  let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  
+  const map = {
+    hh: now.getHours(),
+    mm: now.getMinutes(),
+    ss: now.getSeconds(),
+    dd: now.getDate(),
+    mm: months[now.getMonth()], 
+    yy: now.getFullYear()
+  }
+  let formattedDate = targetFormat.replace(/mm|dd|yy/gi, matched => map[matched]);
+
+  return formattedDate;
+}
+
+</script>
+
 {% if request.user.is_authenticated %}
 <h1>Chatroom</h1>
 
-{% for message in messages %}
-<div class="message">
-  <span class="grey">[{{ message.created_at }}]</span>
-  {{ message.author }}:
-  <i>{{ message.text }}</i>
+<div id="messageContainer">
+  {% for message in messages %}
+  <div class="message">
+    <span class="grey">[ {{ message.created_at }} ]</span>
+    {{ request.user.first_name }}:
+    <i>{{ message.text }}</i>
+  </div>
+  {% endfor %}
 </div>
-{% endfor %}
 
-<form action="/chat/" method="POST">
+<form onsubmit="sendMessage(); return false" method="post">
   {% csrf_token %}
   <div class="mdl-textfield mdl-js-textfield">
-    <input name="textmessage" class="mdl-textfield__input" type="text" id="sample1">
+    <input name="textmessage" class="mdl-textfield__input" type="text" id="messagefield">
     <label class="mdl-textfield__label" for="sample1">Text...</label>
   </div>
   <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
