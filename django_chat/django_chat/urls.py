@@ -18,6 +18,10 @@ from django.urls import path
 from chat.views import index
 from chat.views import login_view, register_view
 
+# rename standard
+admin.site.site_header = 'Chat App'     # default: "Django Administration"
+admin.site.index_title = 'Structure'    # default: "Site administration"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chat/', index),    
