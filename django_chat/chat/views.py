@@ -1,3 +1,5 @@
+from http.client import HTTPResponse
+import json
 from sqlite3 import dbapi2
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -5,13 +7,17 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Chat, Message
 from django.http.response import HttpResponseRedirect
+from django.http import JsonResponse, HttpResponse
+from django.core import serializers
 
 @login_required(login_url='/login/')
 def index(request):
     if request.method == 'POST':
-        print('erfolgreich gesendet ' + request.POST['textmessage'])
         myChat = Chat.objects.get(id=1)
-        Message.objects.create(text=request.POST['textmessage'], chat=myChat, author=request.user, receiver=request.user)
+        new_Message = Message.objects.create(text=request.POST['textmessage'], chat=myChat, author=request.user, receiver=request.user)
+        serialized_Message = serializers.serialize('json', [ new_Message, ]) # serialize returns a string
+        json_data = json.loads(serialized_Message) # loads() returns an Json array
+        return JsonResponse(json_data[0], safe=False)
     chatMessages = Message.objects.filter(chat__id=1)
     return render(request, 'chat/index.html', {'messages': chatMessages})
  
