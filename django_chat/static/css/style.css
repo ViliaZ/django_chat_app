@@ -27,11 +27,22 @@
     height: 60%;
 }
 
+.d-flex{
+    display: flex!important;
+    gap: 0.7rem;
+}
+
 .flex_col {
     display: flex;
     flex-direction: column;
     width: max-content;
 }
+
+.center-icon {
+    display: flex;
+    align-items: center;
+    line-height:1.4;
+  }
 
 .error-msg{
     color: red;

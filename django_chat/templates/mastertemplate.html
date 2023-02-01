@@ -7,9 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
-   <!-- <script  src="{% static 'js/script.js' %}"></script>  -->
+    <!-- <script  src="{% static 'js/script.js' %}"></script>  -->
 
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
@@ -34,8 +37,8 @@
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. We hide it in small screens. -->
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
+                    <a class="mdl-navigation__link d-flex"  > <span class="material-symbols-outlined">
+                        logout</a>
                 </nav>
             </div>
         </header>
@@ -44,9 +47,18 @@
                 ChatApp
             </span>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link d-flex" href="/login/"> <span class="material-symbols-outlined">
+                        login
+                    </span class="center-icon"> Login</a>
+                <a class="mdl-navigation__link center-icon d-flex" href="/chat/"><span class="material-symbols-outlined">
+                        home
+                    </span class="center-icon">Chat</a>
+                <a class="mdl-navigation__link center-icon d-flex" href="/logout/"><span class="material-symbols-outlined">
+                        logout
+                    </span class="center-icon"> Logout</a>
+
             </nav>
+
         </div>
         <main class="mdl-layout__content">
             <div class="page-content">
