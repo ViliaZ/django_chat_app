@@ -1,13 +1,13 @@
 from http.client import HTTPResponse
 import json
 from sqlite3 import dbapi2
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Chat, Message
 from django.http.response import HttpResponseRedirect
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.core import serializers
 
 @login_required(login_url='/login/')
@@ -58,3 +58,11 @@ def register_view(request):
             user.save()
             return redirect('/login')
     return render(request, 'auth/register.html')
+
+
+def logout_view(request):
+    if request.user.is_authenticated and request.method == 'POST':
+        logout(request)
+        return render(request, 'auth/logout.html')
+    else:
+        return redirect('/login')

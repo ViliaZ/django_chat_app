@@ -37,8 +37,12 @@
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. We hide it in small screens. -->
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link d-flex"  > <span class="material-symbols-outlined">
-                        logout</a>
+                    <form method="POST" action="/logout/">
+                        {% csrf_token %}
+                        <button class="mdl-navigation__link d-flex">
+                            <span class="material-symbols-outlined">logout</span>
+                        </button>
+                    </form>
                 </nav>
             </div>
         </header>
@@ -50,10 +54,12 @@
                 <a class="mdl-navigation__link d-flex" href="/login/"> <span class="material-symbols-outlined">
                         login
                     </span class="center-icon"> Login</a>
-                <a class="mdl-navigation__link center-icon d-flex" href="/chat/"><span class="material-symbols-outlined">
+                <a class="mdl-navigation__link center-icon d-flex" href="/chat/"><span
+                        class="material-symbols-outlined">
                         home
                     </span class="center-icon">Chat</a>
-                <a class="mdl-navigation__link center-icon d-flex" href="/logout/"><span class="material-symbols-outlined">
+                <a class="mdl-navigation__link center-icon d-flex" href="/logout/"><span
+                        class="material-symbols-outlined">
                         logout
                     </span class="center-icon"> Logout</a>
 

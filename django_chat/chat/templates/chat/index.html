@@ -36,7 +36,6 @@
     messageContainer.prepend(previewMessage);// render preview message while waiting for backend
   }
 
-
   function showFinalMessage(fetchedData){
     finalMessage = document.createElement("div");
     finalMessage.innerHTML += `
@@ -48,7 +47,6 @@
     `
     messageContainer.prepend(finalMessage);// render preview message while waiting for backend
   }
-
 
   function getFormattedDate() {
     let now = new Date();
@@ -68,7 +66,6 @@
   }
 
 </script>
-
 
 {% if request.user.is_authenticated %}
 <h1>Chatroom</h1>

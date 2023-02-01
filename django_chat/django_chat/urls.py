@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from chat.views import index
-from chat.views import login_view, register_view
+from chat.views import login_view, register_view, logout_view
 
 # rename standard
 admin.site.site_header = 'Chat App'     # default: "Django Administration"
@@ -26,5 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('chat/', index),    
     path('login/', login_view),
-    path('register/', register_view)
+    path('register/', register_view), 
+    path('logout/', logout_view)
 ]
