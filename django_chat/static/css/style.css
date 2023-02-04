@@ -1,3 +1,12 @@
+.margin{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.margin-top{
+    margin-top: 1rem;
+}
+
 .page-content {
     margin: 100px auto;
     max-width: 450px;
@@ -5,6 +14,15 @@
 
 .grey {
     color: rgba(0, 0, 0, 0.4);
+}
+
+.msg-form {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .message {
@@ -27,8 +45,8 @@
     height: 60%;
 }
 
-.d-flex{
-    display: flex!important;
+.d-flex {
+    display: flex !important;
     gap: 0.7rem;
 }
 
@@ -41,14 +59,33 @@
 .center-icon {
     display: flex;
     align-items: center;
-    line-height:1.4;
-  }
+    line-height: 1.4;
+}
 
-.error-msg{
+.error-msg {
     color: red;
     font-style: italic;
 }
 
-form{
-    margin-bottom: 12px;
+.linkstyle-blank {
+    text-decoration: none;
+    color: unset;
+}
+
+button {
+    margin: 1rem 0rem;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.btn-logout {
+    border: none;
+    width: 100%;
+    background-color: unset !important;
+}
+
+.btn-logout[with-hover]:hover {
+    background-color: #e0e0e0 !important;
 }

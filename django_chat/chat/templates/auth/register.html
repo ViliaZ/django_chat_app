@@ -2,7 +2,7 @@
 {% block content %}
 
 
-<h1>Login</h1>
+<h1>Register</h1>
 
 {% if error_message %}
 <p class="error-msg">{{ error_message }}</p>
@@ -11,19 +11,19 @@
 <form action="/register/" method="POST">
     {% csrf_token %}
     <input type="hidden" name="redirect" value="{{ redirect }}">
-    <div class="flex_col">
-        <label for="name">Name</label>
+    <div class="flex_col margin-top">
+        <label for="name">name</label>
         <input name="username" type="text">
     </div>
-    <div class="flex_col">
-        <label for="password">Passwort</label>
+    <div class="flex_col margin-top">
+        <label for="password">password</label>
         <input name="passwordvalue1" type="password">
     </div>
-    <div class="flex_col">
-        <label for="password_confirm">Passwort wiederholen</label>
+    <div class="flex_col margin-top">
+        <label for="password_confirm">password confirmation</label>
         <input name="passwordvalue2" type="password">
     </div>
-    <button>Register</button>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent margin">Register</button>
 </form>
 
 <div>Or <a href="/login">login here</a> if you already have an account.
