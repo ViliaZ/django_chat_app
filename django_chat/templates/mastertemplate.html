@@ -25,25 +25,29 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
-                <!-- Title -->
                 <span class="mdl-layout-title">
                     {% if request.user.is_authenticated %}
-                    Welcome {{ request.user.first_name }}!
+                    Chatroom  
                     {% else %}
-                    ChatApp
+                    <a class="linkstyle-blank" href="/login/">ChatApp</a>
                     {% endif %}
                 </span>
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. We hide it in small screens. -->
+                {% if request.path != '/login/' %}
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
+                    {% if request.user.is_authenticated %}
+                    <span title="Current user">{{ request.user.first_name }}</span>
+                    {% endif %}
                     <form method="POST" action="/logout/">
                         {% csrf_token %}
-                        <button class="mdl-navigation__link d-flex">
-                            <span class="material-symbols-outlined">logout</span>
+                        <button class="mdl-navigation__link d-flex btn-logout">
+                            <span title="logout" class="material-symbols-outlined">logout</span>
                         </button>
                     </form>
                 </nav>
+                {% endif %}
             </div>
         </header>
         <div class="mdl-layout__drawer">
@@ -51,18 +55,27 @@
                 ChatApp
             </span>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link d-flex" href="/login/"> <span class="material-symbols-outlined">
+
+                {% if not request.user.is_authenticated %}
+                <a class="mdl-navigation__link d-flex" href="/login/"> <span 
+                        class="material-symbols-outlined">
                         login
                     </span class="center-icon"> Login</a>
+                {% endif %}
+
                 <a class="mdl-navigation__link center-icon d-flex" href="/chat/"><span
                         class="material-symbols-outlined">
                         home
                     </span class="center-icon">Chat</a>
-                <a class="mdl-navigation__link center-icon d-flex" href="/logout/"><span
-                        class="material-symbols-outlined">
-                        logout
-                    </span class="center-icon"> Logout</a>
 
+                {% if request.user.is_authenticated %}
+                <form method="POST" action="/logout/">
+                    {% csrf_token %}
+                    <button with-hover type="submit" class="mdl-navigation__link center-icon d-flex btn-logout">
+                      <span class="material-symbols-outlined">logout</span> Logout
+                    </button>
+                  </form>
+                {% endif %}
             </nav>
 
         </div>

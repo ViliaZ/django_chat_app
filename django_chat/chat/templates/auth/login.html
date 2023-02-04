@@ -11,18 +11,19 @@
 <form action="/login/" method="POST">
     {% csrf_token %}
     <input type="hidden" name="redirect" value="{{ redirect }}">
-    <div class="flex_col">
-        <label for="name">Name</label>
+    <div class="flex_col margin-top">
+        <label for="name">name</label>
         <input name="username" type="text">
     </div>
-    <div class="flex_col">
-        <label for="password">Passwort</label>
+    <div class="flex_col margin-top">
+        <label for="password">password</label>
         <input name="password" type="password">
     </div>
-    <button>Einloggen</button>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent margin">Login</button>
 </form>
 
-<div>Don`t have an account yet? Register <a href="/register/">here</a>
+<div>Don`t have an account yet? Register <a href="/register/">here</a>.
 </div>
+
 
 {% endblock %}

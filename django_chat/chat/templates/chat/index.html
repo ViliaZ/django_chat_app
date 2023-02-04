@@ -19,6 +19,7 @@
       let messageAsJson = await result.json();
       previewMessage.remove();
       showFinalMessage(messageAsJson);
+      messageForm.reset();
     } catch (e) {
       console.error('Error in sending message to backend:', e)
     }
@@ -67,19 +68,13 @@
 
 </script>
 
-{% if request.user.is_authenticated %}
-<h1>Chatroom</h1>
-
-
-
-<form onsubmit="sendMessage(); return false" method="post">
+<form id="messageForm" onsubmit="sendMessage(); return false" method="post" class="msg-form">
   {% csrf_token %}
   <div class="mdl-textfield mdl-js-textfield">
-    <input name="textmessage" class="mdl-textfield__input" type="text" id="messagefield">
-    <label class="mdl-textfield__label" for="sample1">Text...</label>
+    <input placeholder="Your message ..." name="textmessage" class="mdl-textfield__input" type="text" id="messagefield">
   </div>
-  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-    Button
+  <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    Send
   </button>
 </form>
 
@@ -93,10 +88,10 @@
   {% endfor %}
 </div>
 
-{% else %}
 
-<h1>Forgot to login?</h1>
-<p>Please <a href="/login/">login here </a>to get access to the chatroom</p>
 
-{% endif %}
+<!-- <h1>Forgot to login?</h1>
+<p>Please <a href="/login/">login here </a>to get access to the chatroom</p> -->
+
+
 {% endblock %}
